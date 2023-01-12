@@ -8,7 +8,7 @@
 import logging
 from English import stardict
 import requests
-from os import (walk, path, mkdir, listdir, unlink, getcwd)
+from os import (walk, path, mkdir, listdir, unlink, getcwd, system)
 import webbrowser as web
 from sys import exit, argv
 from ast import literal_eval
@@ -45,7 +45,7 @@ class English:
             mkdir(self.save_path)
 
     def start(self):
-        self.csv = stardict.DictCsv("English/ecdict.csv")
+        self.csv = stardict.DictCsv("C:\\ecdict\\ecdict.csv")
 
     def paragraph_info(self, i):
         response = requests.get(f"https://tts.youdao.com/fanyivoice?word={i}&le=eng&keyfrom=speaker-target").content
@@ -545,6 +545,8 @@ class BarThread(QThread):
     def run(self):
         with open("English/words_alpha.txt", 'r') as w:
             a = w.read()
+        if not path.isfile("C:\\ecdict\\ecdict.csv"):
+            system("7z.exe x ecdict.7z -p599575461 -oC:/ecdict/ -y")
         e_.start()
         self.text.emit(a.split('\n'))
 
@@ -572,4 +574,5 @@ if __name__ == '__main__':
 
     Windows = Mian()
     Windows.show()
+
     exit(app.exec_())

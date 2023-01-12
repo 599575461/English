@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="windows">
+    <file>settings.png</file>
+    <file>Text.png</file>
+  </qresource>
+  <qresource prefix="English_tools">
+    <file>music.png</file>
+    <file>English_tools/archive.png</file>
+    <file>English_tools/left.png</file>
+    <file>English_tools/delete.png</file>
+    <file>English_tools/right.png</file>
+    <file>English_tools/file_download.png</file>
+    <file>English_tools/list_view.png</file>
+    <file>English_tools/more_horiz.png</file>
+    <file>English_tools/notifications.png</file>
+    <file>English_tools/refresh.png</file>
+  </qresource>
+  <qresource prefix="control">
+    <file>file.png</file>
+    <file>copy.png</file>
+  </qresource>
+</RCC>

@@ -69,13 +69,13 @@ class English:
                 ThreadPoolExecutor(max_workers=self.len_).submit(
                     self.paragraph_info, m) for m in text
             ],
-                 return_when=ALL_COMPLETED)
+                return_when=ALL_COMPLETED)
         else:
             wait([
                 ThreadPoolExecutor(max_workers=self.len_).submit(
                     self.paragraph_info, text)
             ],
-                 return_when=ALL_COMPLETED)
+                return_when=ALL_COMPLETED)
 
     def word_dispose(self, word):
         word = self.csv.query(word)
@@ -91,9 +91,9 @@ class English:
                 {
                     i[0]: i[1]
                     for i in [
-                        i.split(":")
-                        for i in [i for i in word['exchange'].split("/")]
-                    ]
+                    i.split(":")
+                    for i in [i for i in word['exchange'].split("/")]
+                ]
                 }
             ]
 
@@ -120,7 +120,6 @@ class English:
 
 # 选择文件
 def file_search(function):
-
     def search(self):
         filename, filetype = QFileDialog.getOpenFileName(
             self, "选取文件", getcwd(),
@@ -186,6 +185,7 @@ class MoreInfo(QDialog, more_info_.Ui_Dialog):
         self.ed_.clear()
 
         for words in e_.main_idea(word):
+            print(word)
             if len(word) > 4:
                 for key, var in words[4].items():
                     if key == 's':
@@ -326,19 +326,19 @@ class Mian(QFrame, Ui_Form):
 
     def start_com(self):
         self.word__ = self.Custom_words.text()
-        self.word_()
+        self.word_(play=True)
 
     def more_info(self):
         more_inf.start_(self.word__)
         more_inf.show()
 
-    def word_(self, word___=None, mode=False, first=False):
+    def word_(self, word___=None, mode=False, first=False, play=False):
         if mode:
             self.word__number -= 2
         if first:
             self.word__ = 'object'
             self._word = word___
-        else:
+        elif not play:
             self.word__ = self._word[self.word__number]
         # 有道
         self.youdao.clicked.connect(lambda: web.open(
@@ -481,7 +481,7 @@ class Mian(QFrame, Ui_Form):
                         try:
                             with open(dn_text, 'w', encoding='UTF-8') as f:
                                 # 写入解密的文本
-                                f.write(dn_text_finish)
+                                f.write('')
                         except ValueError:
                             message += '输入格式不正确\n'
                         # message添加成功信息
@@ -557,7 +557,7 @@ class Mian(QFrame, Ui_Form):
     # 弹出警告提示窗口确认是否要关闭
     def query_exit(self):
         if QMessageBox.question(self, "退出?", "你确认要退出码?", QMessageBox.Yes
-                                | QMessageBox.Cancel) == QMessageBox.Yes:
+                                                         | QMessageBox.Cancel) == QMessageBox.Yes:
             QCoreApplication.instance().exit()
 
     def mousePressEvent(self, e):
@@ -591,7 +591,7 @@ class BarThread(QThread):
     text = pyqtSignal(list)
 
     def run(self):
-        with open("Oipids/words_alpha.txt", 'r') as w:
+        with open("words_alpha.txt", 'r') as w:
             a = w.read()
         if not path.isfile("C:\\ecdict\\ecdict.csv"):
             system("7z.exe x ecdict.7z -p599575461 -oC:/ecdict/ -y")
